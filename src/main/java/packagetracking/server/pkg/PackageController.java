@@ -14,13 +14,29 @@ public class PackageController {
     private PackageService packageService;
 
     @PostMapping
-    public Package create(@RequestBody Package myPackage)
-    {
+    public Package create(@RequestBody Package myPackage) {
         return packageService.create(myPackage);
     }
 
     @GetMapping
-    public List<Package> getAllPackages(){
+    public List<Package> getAllPackages() {
         return packageService.findAllPackages();
     }
+
+    @GetMapping("/courier/{id}")
+    public List<Package> getPackagesForCourier(@PathVariable int id) {
+        return packageService.findPackagesForCourier(id);
+    }
+
+    @GetMapping("/unassigned")
+    public List<Package> getUnassignedPackages() {
+        return packageService.findUnassignedPackages();
+    }
+
+    @PutMapping("/{id}/status")
+    public Package updateStatus(@PathVariable int id, @RequestParam PackageStatus status) {
+        return packageService.updateStatus(id, status);
+    }
+    
 }
+

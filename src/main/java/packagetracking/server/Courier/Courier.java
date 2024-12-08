@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -17,5 +18,21 @@ public class Courier {
     @ApiModelProperty(hidden = true)
     private Integer id;
 
+    @Column(nullable = false)
     private String name;
+
+    private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
+    private Courier manager;
+
+    /* 
+    @OneToMany(mappedBy = "manager")
+    private List<Courier> subordinates;
+    */
+
+    @OneToMany(mappedBy = "courier")
+    private List<packagetracking.server.pkg.Package> packages;
+
 }

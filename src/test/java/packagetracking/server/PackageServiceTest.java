@@ -31,21 +31,22 @@ public class PackageServiceTest {
     }
 
     @Test
-    void testFindAllEmployees(){
-        // setup test
-        Package p1 = new Package(1, null, "Baritiu 26", new Date(1), PackageStatus.DELIVERED);
-        Package p2 = new Package(2, null, "Baritiu 28", new Date(2), PackageStatus.NEW);
+void testFindAllEmployees() {
+    // setup test
+    Package p1 = new Package(1, null, "Baritiu 26", true, new Date(1), PackageStatus.DELIVERED);
+    Package p2 = new Package(2, null, "Baritiu 28", true, new Date(2), PackageStatus.NEW);
 
-        List<Package> packagesMock = List.of(p1, p2);
-        when(packageRepository.findAll()).thenReturn(packagesMock);
+    List<Package> packagesMock = List.of(p1, p2);
+    when(packageRepository.findAll()).thenReturn(packagesMock);
 
-        // call method under test
-        List<Package> packages = packageService.findAllPackages();
+    // call method under test
+    List<Package> packages = packageService.findAllPackages();
 
-        // check what was called by the method and check the result
-        verify(packageRepository, times(1)).findAll();
-        assertEquals(2, packages.size());
-        assertEquals(p1, packages.get(0));
-        assertEquals(p2, packages.get(1));
-    }
+    // check what was called by the method and check the result
+    verify(packageRepository, times(1)).findAll();
+    assertEquals(2, packages.size());
+    assertEquals(p1, packages.get(0));
+    assertEquals(p2, packages.get(1));
+}
+
 }

@@ -3,6 +3,11 @@ package packagetracking.server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
@@ -24,4 +29,14 @@ public class ServerApplication {
 				.paths(PathSelectors.any())
 				.build();
 	}
+
+	@RestController
+	@RequestMapping("/health")
+	public class HealthController {
+		@GetMapping
+		public ResponseEntity<String> healthCheck() {
+			return ResponseEntity.ok("Server is running");
+		}
+	}
+
 }

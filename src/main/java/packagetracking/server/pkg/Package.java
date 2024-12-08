@@ -21,16 +21,20 @@ public class Package {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name="courier_id", nullable = true)
-    Courier courier;
+    @JoinColumn(name = "courier_id", nullable = true)
+    private Courier courier;
 
     private String deliveryAddress;
 
+    @Column(nullable = false)
+    private boolean payOnDelivery;
 
     @Column(updatable = false, nullable = false)
     @CreationTimestamp
     @ApiModelProperty(hidden = true)
     private Date createdOn;
 
+    @Enumerated(EnumType.STRING)
     private PackageStatus status;
 }
+
