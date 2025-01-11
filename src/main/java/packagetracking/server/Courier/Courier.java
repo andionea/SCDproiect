@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -25,14 +28,15 @@ public class Courier {
 
     @ManyToOne
     @JoinColumn(name = "manager_id")
+    @JsonBackReference
     private Courier manager;
 
-    /* 
     @OneToMany(mappedBy = "manager")
+    @JsonManagedReference
     private List<Courier> subordinates;
-    */
-
+    
     @OneToMany(mappedBy = "courier")
     private List<packagetracking.server.pkg.Package> packages;
+    
 
 }
